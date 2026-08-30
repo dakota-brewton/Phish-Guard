@@ -1,8 +1,9 @@
-export default function Main() {
+export default function Dashboard() {
     return (
-    <main>
-      <h1>Dashboard</h1>
-      <p>Data and stats will go here!</p>
-    </main>
+    <div className="flex flex-col items-center mt-40">
+      <h1 className="text-5xl font-semibold">Dashboard</h1>
+
+
+    </div>
   );
 }
