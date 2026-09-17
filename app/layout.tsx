@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Pacifico } from "next/font/google";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -7,8 +7,14 @@ const openSans = Open_Sans({
   subsets: ["latin"],
 });
 
+const pacifico = Pacifico({
+  variable: "--font-pacifico",
+  subsets: ["latin"],
+  weight: "400"
+});
+
 export const metadata: Metadata = {
-  title: "Phishguard",
+  title: "PhishGuard",
   description: "Detect malicious/phishing emails",
 };
 
@@ -16,7 +22,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${openSans.variable} h-full antialiased`}
+      className={`${openSans.variable} ${pacifico.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
