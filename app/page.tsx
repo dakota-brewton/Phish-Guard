@@ -35,7 +35,6 @@ export default function Main() {
 
     const data = await response.json(); // This is what we receive back from the backend upon pushing the data the user entered, store in data
     if (data.success) {
-      await new Promise((resolve) => setTimeout(resolve, 5000));
       router.push(`/dashboard/${data.scanId}`);
     }
 
@@ -58,7 +57,7 @@ export default function Main() {
           </div>
           <textarea placeholder="Paste the possible phishing email or text message here..." onChange={handleChange} className="bg-white border-2 text-sm p-5 rounded-lg rounded-t-none placeholder-gray-400 h-150 w-150 overflow-auto resize-none focus:outline-none"></textarea>
         </div>
-        <button onClick={handleScan} disabled={isButtonDisabled} className="px-4 py-2 bg-[#4795c9] hover:bg-[#3977a0] text-white font-bold rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-default">Analyze</button>
+        <button onClick={handleScan} disabled={isButtonDisabled} className="px-4 py-2 bg-[#4795c9] hover:bg-[#3977a0] transition-colors duration-300 text-white font-bold rounded-lg cursor-pointer disabled:bg-gray-400 disabled:cursor-default">Analyze</button>
       </div>
     </div>
     

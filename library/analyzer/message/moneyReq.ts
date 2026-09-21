@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeMoneyReq(message: string) {
@@ -29,6 +30,7 @@ export function analyzeMoneyReq(message: string) {
         findings.push({
             title: "Financial Request",
             description: "The message requests money or payment using methods commonly abused by scammers.",
+            severity: "High",
         });
     }
 

@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeFear(message: string) {
@@ -29,6 +30,7 @@ export function analyzeFear(message: string) {
         findings.push({
             title: "Threatening Language",
             description: "The message attempts to create fear by threatening consequences if no action is taken.",
+            severity: "Medium",
         });
     }
 

@@ -14,6 +14,7 @@ import { analyzeWithOllama } from "../ollama";
 type Finding = {
     title: string;
     description: string;
+    severity: string;
 };
 
 function getRisk(score: number) {
@@ -67,13 +68,13 @@ export async function analyzeEmail(sender: string, message: string) {
     ];
 
     let score = Math.min(ruleScore, 100);
+    let aiScore = -1;
     let findings = [...ruleFindings];
     let summary = "Placeholder";
 
     try {
         const aiAnalysis = await analyzeWithOllama(sender, message);
-        // Use higher score so there's no overlap
-        score = Math.max(score, aiAnalysis.score);
+        aiScore = Math.min(aiAnalysis.score, 100);
         
         const existingTitles = new Set(
             findings.map((finding) => finding.title.toLowerCase()),
@@ -88,12 +89,18 @@ export async function analyzeEmail(sender: string, message: string) {
     } catch(error) {
         console.error("Ollama analysis failed, using rule-based analysis for now", error)
     }
-    score = Math.min(Math.max(score, 0), 100); // Make sure score doesn't exceed 100
+    score = Math.min(Math.max(score, 0), 100); // Make sure score doesn't exceed 100 or go below 0
+    aiScore = Math.min(Math.max(aiScore, 0), 100); // Make sure score doesn't exceed 100 or go below 0
+    const overallScore = Math.round(score * 0.4 + aiScore * 0.6); // Use weight system to get overall score
 
     // Return data for the database
     return {
         score,
+        aiScore,
+        overallScore,
         risk: getRisk(score),
+        aiRisk: getRisk(aiScore),
+        overallRisk: getRisk(overallScore),
         findings,
         summary,
     };

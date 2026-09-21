@@ -1,6 +1,7 @@
 type AIFinding = {
   title: string;
   description: string;
+  severity: "Low" | "Moderate" | "Medium" | "High"
 };
 
 type AIAnalysis = {
@@ -36,9 +37,9 @@ Assess the message's phishing risk using its context, not just keywords.
 Do not assume a message is malicious merely because it is urgent or uses a free email provider.
 Do not claim that links, attachments, or sender identities were verified.
 Return only a JSON object with:
-- "score": an integer from 0 to 100
-- "summary": a brief plain-language explanation
-- "findings": an array of objects, each with "title" and "description"
+- "score": an integer from 0 to 100 that gauges how likely you believe the message is phishing based on the findings, 0 being no and 100 being highly likely to be phishing
+- "summary": a brief plain-language explanation, try to summarize the findings in 1-3 sentences.
+- "findings": an array of objects, each with "title", "description", and "severity". Make sure the title is no more than 3 words. Make sure the severity is either "Low", "Moderate", "Medium", or "High".
 Use an empty findings array if you find no specific suspicious indicators.`,
         },
         {
@@ -90,8 +91,10 @@ Use an empty findings array if you find no specific suspicious indicators.`,
         finding !== null &&
         "title" in finding &&
         "description" in finding &&
+        "severity" in finding &&
         typeof finding.title === "string" &&
-        typeof finding.description === "string",
+        typeof finding.description === "string" &&
+        typeof finding.severity === "string",
     )
     .slice(0, 8);
 

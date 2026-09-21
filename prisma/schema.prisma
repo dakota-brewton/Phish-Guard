@@ -20,7 +20,11 @@ model Scan {
   body          String
 
   score         Int 
+  aiScore       Int
+  overallScore  Int
   riskLevel     String
+  aiRiskLevel   String
+  overallRL     String
   findings      Json
   summary       String?
 

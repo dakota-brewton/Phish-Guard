@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 // Check for if the sender address is a free provider
@@ -29,6 +30,7 @@ export function analyzeFreeProvider(sender: string) {
         findings.push({
             title: "Free Email Provider",
             description: "The sender is using a free email provider, which isn't a dead giveaway, but if claiming to represent a company it's suspicious.",
+            severity: "Low"
         });
     }
 

@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeCredentialR(message: string) {
@@ -29,6 +30,7 @@ export function analyzeCredentialR(message: string) {
         findings.push({
             title: "Credential Request",
             description: "This message asks you to provide login credentials or to verify your account.",
+            severity: "High",
         });
     }
 

@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeTGTBT(message: string) {
@@ -29,6 +30,7 @@ export function analyzeTGTBT(message: string) {
         findings.push({
             title: "Prize or Reward Claim",
             description: "Unexpected prizes and rewards are a common phishing tactic, and this message contains that.",
+            severity: "Moderate",
         });
     }
 

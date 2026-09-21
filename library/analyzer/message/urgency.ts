@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeUrgency(message: string) {
@@ -29,6 +30,7 @@ export function analyzeUrgency(message: string) {
         findings.push({
             title: "Urgent Language",
             description: "This message contains language intended to pressure the recipient into acting quickly.",
+            severity: "Medium",
         });
     }
 

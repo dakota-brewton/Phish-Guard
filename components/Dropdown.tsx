@@ -48,7 +48,7 @@ export default function DashboardTile({
                     <h2 className="text-xl font-bold mb-5 text-black">
                         From: {sender}
                     </h2>
-                    <p className="text-xl font-semibold text-black whitespace-pre-wrap wrap-break-word">
+                    <p className="text-xl text-black whitespace-pre-wrap wrap-break-word">
                         {body}
                     </p>
                 </div>

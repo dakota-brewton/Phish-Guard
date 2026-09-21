@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeSensitive(message: string) {
@@ -29,6 +30,7 @@ export function analyzeSensitive(message: string) {
         findings.push({
             title: "Sensitive Information Request",
             description: "This message requests personal or financial information that legitimate organizations rarely request by email.",
+            severity: "High",
         });
     }
 

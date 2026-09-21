@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 export interface Finding extends Prisma.JsonObject {
     title: string;
     description: string;
+    severity: "Low" | "Moderate" | "Medium" | "High"
 }
 
 export function analyzeVerification(message: string) {
@@ -29,6 +30,7 @@ export function analyzeVerification(message: string) {
         findings.push({
             title: "Account Verification Request",
             description: "The message requests you verify or reactivate an account, a common phishing tactic.",
+            severity: "High",
         });
     }
 

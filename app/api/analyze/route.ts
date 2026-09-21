@@ -14,7 +14,11 @@ export async function POST(req: Request) {
                 body: message,
                 
                 score: analysis.score,
+                aiScore: analysis.aiScore,
+                overallScore: analysis.overallScore,
                 riskLevel: analysis.risk,
+                aiRiskLevel: analysis.aiRisk,
+                overallRL: analysis.overallRisk,
                 findings: analysis.findings,
                 summary: analysis.summary,
             },

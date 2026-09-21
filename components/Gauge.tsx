@@ -46,8 +46,7 @@ export default function Gauge({
         <path
           d="M 20 100 A 80 80 0 0 1 180 100"
           fill="none"
-          stroke="currentColor"
-          strokeOpacity="0.12"
+          stroke="#cfcfcf"
           strokeWidth="16"
           strokeLinecap="round"
         />
