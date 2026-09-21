@@ -47,11 +47,29 @@ export default async function Dashboard({ params }: DashboardProps) {
     High: "red-500",
   };
 
+  const findingEmojis: Record<string, string> = {
+    "Urgent Language": "⚡",
+    "Credential Request": "🔑",
+    "Sensitive Information Request": "🔒",
+    "Threatening Language": "😨",
+    "Account Verification Request": "🛡️",
+    "Financial Request": "💵",
+    "Prize or Reward Claim": "💰",
+    "Suspicious Link": "🔗",
+    "Suspicious Sender": "👤",
+    "Free Email Provider": "📧",
+  };
+
   return (
     <div className="flex flex-col px-90 py-30">
       <BackButton className="mb-7 bg-[#cfcfcf] hover:bg-[#bfbfbf]"></BackButton>
-      <h1 className="font-semibold text-5xl">Dashboard</h1>
-      <p className="text-xl text-gray-500">Lets go phishing... 🎣</p>
+      <div className="flex flex-row items-center">
+        <div className="flex flex-col">
+          <h1 className="font-semibold text-5xl">Dashboard</h1>
+          <p className="text-xl text-gray-500">Lets go phishing... 🎣</p>
+        </div>
+        <h1 className="font-bold text-2xl ml-auto">Scan #{scan.id}</h1>
+      </div>
       <div className="flex flex-col mt-30">
         <Dropdown title="View Email" body={scan.body} sender={scan.sender} className="h-20 mb-5 bg-blue-300"></Dropdown>
         <div className="flex flex-wrap items-center w-full mt-5 gap-10">
@@ -61,8 +79,15 @@ export default async function Dashboard({ params }: DashboardProps) {
                 <h1 className="text-center text-5xl font-semibold mt-20">{scan.overallRL}</h1>
                 <Gauge percent={scan.overallScore} color={scaleColor} className=""></Gauge>
               </DashboardTile>
-              <DashboardTile title="Analysis Breakdown" className="w-100 h-100">
-                <h1></h1>
+              <DashboardTile title="Detected Tactics" className="w-100 h-100">
+                <div className="mt-12 ml-0">
+                  {findings.slice(0, 7).map((finding, index) => (
+                    <p key={index} className="mb-3 text-xl">{findingEmojis[finding.title] || "⚠️"} {finding.title}</p>
+                  ))}
+                  {findings.length > 7 && (
+                    <p className="mb-3 text-gray-500">...and more</p>
+                  )}
+                </div>
               </DashboardTile>
             </div>
             <div className="w-full flex">
@@ -89,10 +114,20 @@ export default async function Dashboard({ params }: DashboardProps) {
               </div>
             </div>
             <div className="grid grid-cols-4 mt-5 gap-10 p-10">
-              {findings.map((finding, index) => (
+              {[...findings]
+                .sort((a, b) => {
+                  const severityOrder = {
+                    High: 1,
+                    Medium: 2,
+                    Moderate: 3,
+                    Low: 4,
+                  };
+                  return severityOrder[a.severity] - severityOrder[b.severity];
+                })
+                .map((finding, index) => (
                 <DashboardTile title={finding.title} key={index} className="w-100 h-100 flex items-center justify-center text-center">
                   <div className={`absolute top-6 right-7 rounded-full w-5 h-5 bg-${severityColors[finding.severity]}`}></div>
-                  <p className="text-3xl">{finding.description}</p>
+                  <p className="text-2xl">{finding.description}</p>
                 </DashboardTile>
               ))}
             </div>
