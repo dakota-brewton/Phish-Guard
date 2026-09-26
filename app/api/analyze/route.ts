@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { analyzeEmail } from "@/library/analyzer";
 import { prisma } from "@/library/prisma";
-import { auth } from "@/library/auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/library/auth";
 
 export async function POST(req: Request) {
     try {
         const { sender, message } = await req.json(); // Gathers the info from the frontend and stores it in sender and message respectively
-        const session = await auth();
+        const session = await getServerSession(authOptions);
 
         if(!session?.user) {
             return NextResponse.json(
