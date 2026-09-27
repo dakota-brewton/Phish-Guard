@@ -11,6 +11,8 @@ export default function RegisterPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const { status } = useSession();
 
     useEffect(() => {
@@ -39,10 +41,12 @@ export default function RegisterPage() {
         const data = await response.json();
         
         if(response.ok) {
-            alert("Account created!");
-            router.push("/login");
+            setSuccess(data.message);
+            setTimeout(() => {
+                router.push("/login");
+            }, 2000);
         } else {
-            alert(data.message);
+            setError(data.message);
         }
     }
 
@@ -84,6 +88,16 @@ export default function RegisterPage() {
                                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="focus: outline-none w-full"/>
                             </div>
                         </div>
+                        {error && (
+                            <div className="w-full h-full flex items-center justify-center rounded-sm bg-red-100 border border-red-300">
+                                <p className="p-3 font-semibold text-red-400">{error}</p>
+                            </div>
+                        )}
+                        {success && (
+                            <div className="w-full h-full flex items-center justify-center rounded-sm bg-green-100 border border-green-300">
+                                <p className="p-3 font-semibold text-green-400">{success}</p>
+                            </div>
+                        )}
                         <button onClick={handleRegister} className="bg-black mt-10 p-3 rounded-lg drop-shadow-[#212121] drop-shadow-2xl cursor-pointer">
                             <h1 className="text-white text-xl">Create account</h1>
                         </button>

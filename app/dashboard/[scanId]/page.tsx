@@ -66,7 +66,7 @@ export default async function Dashboard({ params }: DashboardProps) {
       <div className="flex flex-col px-90 py-30">
         <div className="flex flex-row items-center">
           <div className="flex flex-col">
-            <h1 className="font-semibold text-5xl mt-10">Dashboard</h1>
+            <h1 className="font-semibold text-5xl mt-20">Dashboard</h1>
             <p className="text-xl text-gray-500">Lets go phishing... 🎣</p>
           </div>
           <h1 className="font-bold text-2xl ml-auto">Scan #{scan.id}</h1>

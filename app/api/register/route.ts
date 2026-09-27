@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             return NextResponse.json(
                 {
                     success: false,
-                    message: "Email and password required.",
+                    message: "Please enter an email and password.",
                 },
                 { status: 400 }
             );
@@ -31,6 +31,17 @@ export async function POST(req: Request) {
                     message: "An account with this email is already registered.",
                 },
                 { status: 409 }
+            );
+        }
+
+        // Verify password is at least 8 characters
+        if(password.length < 8) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message: "Password must be at least 8 characters long.",
+                },
+                { status: 400 }
             );
         }
 

@@ -12,6 +12,7 @@ export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
     const { status } = useSession();
 
     useEffect(() => {
@@ -33,7 +34,7 @@ export default function LoginPage() {
         });
 
         if(result?.error) {
-            console.log("Login failed", result.error);
+            setError(result.error);
             return;
         }
 
@@ -78,6 +79,11 @@ export default function LoginPage() {
                                 <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="focus: outline-none w-full"/>
                             </div>
                         </div>
+                        {error && (
+                            <div className="w-full h-full flex items-center justify-center rounded-sm bg-red-100 border border-red-300">
+                                <p className="p-3 font-semibold text-red-400">{error}</p>
+                            </div>
+                        )}
                         <button onClick={handleLogin} className="bg-black mt-10 p-3 rounded-lg drop-shadow-[#212121] drop-shadow-2xl cursor-pointer">
                             <h1 className="text-white text-xl">Login</h1>
                         </button>
