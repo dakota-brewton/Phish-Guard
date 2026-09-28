@@ -28,9 +28,9 @@ export default function LoadingFrame() {
     return (
             <div className="absolute left-1/2 top-1/2 w-112.5 -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border] bg-white p-8">
                 <div className="flex justify-center">
-                    <Image src="/images/phishguard.png" alt="PhishGuard logo" width={265} height={265}></Image>
+                    <Image src="/images/phishguardLogo.png" alt="PhishGuard logo" width={265} height={265}></Image>
                 </div>
-                <p className="text-center text-gray-400">
+                <p className="text-center text-xl text-gray-400">
                     Analyzing your message...
                 </p>
 

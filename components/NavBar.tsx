@@ -25,13 +25,13 @@ export default function NavBar({
             <nav className="fixed w-full h-20 z-50 bg-[#161616] border-b-3 border-blue-400">
                 <div className="h-full flex items-center justify-center gap-10">
                     <div className="w-25 h-25 rounded-full mt-15 bg-[#161616]">
-                        <Image src="/images/phishguard.png" alt="phish" width={100} height={100} className="rounded-full"></Image>
+                        <Image src="/images/phishguardLogo.png" alt="phish" width={100} height={100} className="rounded-full"></Image>
                     </div>
                     <button onClick={() => router.push("/")} className="group relative text-white text-md cursor-pointer transition-all duration-200 hover:scale-105">
                         Scan
                         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
                     </button>
-                    <button className="group relative text-white text-md cursor-pointer transition-all duration-200 hover:scale-105">
+                    <button onClick={() => router.push("/dashboard")} className="group relative text-white text-md cursor-pointer transition-all duration-200 hover:scale-105">
                         Dashboard
                         <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-full"></span>
                     </button>

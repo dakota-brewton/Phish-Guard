@@ -2,7 +2,6 @@ import { prisma } from "@/library/prisma";
 import DashboardTile from "@/components/DashboardTile";
 import Dropdown from "@/components/Dropdown";
 import Gauge from "@/components/Gauge";
-import BackButton from "@/components/BackButton";
 import NavBar from "@/components/NavBar";
 
 // scanId needs to be accessible to allow the user to get to the dashboard based on their data id
